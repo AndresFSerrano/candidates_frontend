@@ -1,0 +1,24 @@
+<div
+  *ngIf="open"
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+>
+  <div
+    class="bg-white rounded-xl shadow-xl w-full max-w-md p-6"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-lg font-semibold text-gray-800">
+        {{ title }}
+      </h3>
+
+      <button
+        class="text-gray-400 hover:text-gray-600 text-xl"
+        (click)="close.emit()"
+      >
+        ✕
+      </button>
+    </div>
+
+    <ng-content></ng-content>
+  </div>
+</div>
