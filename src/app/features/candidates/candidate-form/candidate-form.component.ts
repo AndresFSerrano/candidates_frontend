@@ -28,6 +28,8 @@ export class CandidateFormComponent implements OnChanges {
   availability = false;
   file?: File;
 
+  loading = false;
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['candidate']) {
       if (this.candidate) {
@@ -40,11 +42,12 @@ export class CandidateFormComponent implements OnChanges {
       } else {
         this.resetForm();
       }
+      this.loading = false;
     }
   }
 
   onFileChange(event: Event): void {
-    if (this.candidate) return;
+    if (this.candidate || this.loading) return;
 
     const input = event.target as HTMLInputElement;
     if (input.files?.length) {
@@ -53,7 +56,10 @@ export class CandidateFormComponent implements OnChanges {
   }
 
   submit(): void {
+    if (this.loading) return;
     if (!this.name.trim() || !this.surname.trim()) return;
+
+    this.loading = true;
 
     if (this.candidate) {
       const payload: Partial<Candidate> = {
@@ -79,6 +85,11 @@ export class CandidateFormComponent implements OnChanges {
     this.submitForm.emit(formData);
   }
 
+  onCancel(): void {
+    if (this.loading) return;
+    this.cancel.emit();
+  }
+
   private resetForm(): void {
     this.name = '';
     this.surname = '';
@@ -86,5 +97,6 @@ export class CandidateFormComponent implements OnChanges {
     this.years = 0;
     this.availability = false;
     this.file = undefined;
+    this.loading = false;
   }
 }

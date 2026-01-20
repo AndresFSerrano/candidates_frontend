@@ -16,8 +16,10 @@
           name="name"
           required
           placeholder="John"
+          [disabled]="loading"
           class="w-full rounded-xl border border-gray-300 px-4 py-2.5
-                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                 focus:outline-none focus:ring-2 focus:ring-blue-500
+                 disabled:bg-gray-100"
         />
       </div>
 
@@ -31,8 +33,10 @@
           name="surname"
           required
           placeholder="Doe"
+          [disabled]="loading"
           class="w-full rounded-xl border border-gray-300 px-4 py-2.5
-                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                 focus:outline-none focus:ring-2 focus:ring-blue-500
+                 disabled:bg-gray-100"
         />
       </div>
     </div>
@@ -51,8 +55,10 @@
         <select
           [(ngModel)]="seniority"
           name="seniority"
+          [disabled]="loading"
           class="w-full rounded-xl border border-gray-300 px-4 py-2.5
-                 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                 focus:outline-none focus:ring-2 focus:ring-indigo-500
+                 disabled:bg-gray-100"
         >
           <option value="junior">Junior</option>
           <option value="senior">Senior</option>
@@ -68,8 +74,10 @@
           min="0"
           [(ngModel)]="years"
           name="years"
+          [disabled]="loading"
           class="w-full rounded-xl border border-gray-300 px-4 py-2.5
-                 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                 focus:outline-none focus:ring-2 focus:ring-indigo-500
+                 disabled:bg-gray-100"
         />
       </div>
     </div>
@@ -79,6 +87,7 @@
         type="checkbox"
         [(ngModel)]="availability"
         name="availability"
+        [disabled]="loading"
         class="h-5 w-5 rounded border-gray-300 text-green-600 focus:ring-green-500"
       />
       <span class="text-sm text-gray-700">
@@ -100,10 +109,12 @@
         type="file"
         accept=".xlsx"
         (change)="onFileChange($event)"
+        [disabled]="loading"
         class="block w-full text-sm text-gray-600
                file:mr-4 file:rounded-xl file:border-0
                file:bg-blue-50 file:px-4 file:py-2
-               file:text-blue-700 hover:file:bg-blue-100"
+               file:text-blue-700 hover:file:bg-blue-100
+               disabled:opacity-60"
       />
     </div>
   </section>
@@ -111,8 +122,10 @@
   <div class="flex justify-end gap-3 pt-8 border-t">
     <button
       type="button"
+      [disabled]="loading"
       class="px-5 py-2.5 rounded-xl bg-gray-100 text-gray-700
-             hover:bg-gray-200 transition"
+             hover:bg-gray-200 transition
+             disabled:opacity-60"
       (click)="cancel.emit()"
     >
       Cancel
@@ -120,13 +133,43 @@
 
     <button
       type="submit"
-      [disabled]="!name || !surname || (!candidate && !file)"
-      class="px-6 py-2.5 rounded-xl text-white font-semibold
+      [disabled]="loading"
+      class="relative px-5 py-2.5 rounded-xl
              bg-gradient-to-r from-blue-600 to-indigo-600
-             hover:scale-[1.02] transition
-             disabled:opacity-50 disabled:cursor-not-allowed"
+             text-white font-semibold
+             hover:opacity-90
+             disabled:opacity-60
+             disabled:cursor-not-allowed"
     >
-      {{ candidate ? 'Update Candidate' : 'Create Candidate' }}
+      <span [class.opacity-0]="loading">
+        {{ candidate ? 'Update' : 'Create' }}
+      </span>
+
+      <span
+        *ngIf="loading"
+        class="absolute inset-0 flex items-center justify-center"
+      >
+        <svg
+          class="animate-spin h-5 w-5 text-white"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+          ></path>
+        </svg>
+      </span>
     </button>
   </div>
 
