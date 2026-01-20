@@ -16,7 +16,9 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18]
+        with:
+          node-version: 20
+          cache: 'npm'
 
     steps:
       - name: Checkout repository
