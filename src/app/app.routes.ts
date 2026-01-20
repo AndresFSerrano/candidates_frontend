@@ -11,4 +11,8 @@ export const routes: Routes = [
     path: 'candidates',
     component: CandidateListComponent,
   },
+  {
+    path: '**',
+    redirectTo: 'candidates',
+  },
 ];
