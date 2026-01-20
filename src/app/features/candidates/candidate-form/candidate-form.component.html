@@ -1,85 +1,118 @@
-<form (ngSubmit)="submit()" class="space-y-6">
-  <div>
-    <label class="block text-sm font-medium text-gray-700 mb-1">
-      Name
-    </label>
-    <input
-      type="text"
-      [(ngModel)]="name"
-      name="name"
-      required
-      class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-    />
-  </div>
+<form (ngSubmit)="submit()" class="space-y-8">
 
-  <div>
-    <label class="block text-sm font-medium text-gray-700 mb-1">
-      Surname
-    </label>
-    <input
-      type="text"
-      [(ngModel)]="surname"
-      name="surname"
-      required
-      class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-    />
-  </div>
+  <section class="space-y-5">
+    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+      Basic Information
+    </h4>
 
-  <div *ngIf="candidate">
-    <label class="block text-sm font-medium text-gray-700 mb-1">
-      Seniority
-    </label>
-    <select
-      [(ngModel)]="seniority"
-      name="seniority"
-      class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-    >
-      <option value="junior">Junior</option>
-      <option value="senior">Senior</option>
-    </select>
-  </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">
+          Name
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="name"
+          name="name"
+          required
+          placeholder="John"
+          class="w-full rounded-xl border border-gray-300 px-4 py-2.5
+                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
 
-  <div *ngIf="candidate">
-    <label class="block text-sm font-medium text-gray-700 mb-1">
-      Years of experience
-    </label>
-    <input
-      type="number"
-      min="0"
-      [(ngModel)]="years"
-      name="years"
-      class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-    />
-  </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">
+          Surname
+        </label>
+        <input
+          type="text"
+          [(ngModel)]="surname"
+          name="surname"
+          required
+          placeholder="Doe"
+          class="w-full rounded-xl border border-gray-300 px-4 py-2.5
+                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+    </div>
+  </section>
 
-  <div *ngIf="candidate" class="flex items-center gap-2">
-    <input
-      type="checkbox"
-      [(ngModel)]="availability"
-      name="availability"
-      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-    />
-    <label class="text-sm text-gray-700">
-      Available
-    </label>
-  </div>
+  <section *ngIf="candidate" class="space-y-5">
+    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+      Experience
+    </h4>
 
-  <div *ngIf="!candidate">
-    <label class="block text-sm font-medium text-gray-700 mb-1">
-      Excel file
-    </label>
-    <input
-      type="file"
-      accept=".xlsx"
-      (change)="onFileChange($event)"
-      class="block w-full text-sm text-gray-600 file:mr-4 file:rounded-md file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-blue-700 hover:file:bg-blue-100"
-    />
-  </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">
+          Seniority
+        </label>
+        <select
+          [(ngModel)]="seniority"
+          name="seniority"
+          class="w-full rounded-xl border border-gray-300 px-4 py-2.5
+                 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        >
+          <option value="junior">Junior</option>
+          <option value="senior">Senior</option>
+        </select>
+      </div>
 
-  <div class="flex justify-end gap-3 pt-6">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">
+          Years of Experience
+        </label>
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="years"
+          name="years"
+          class="w-full rounded-xl border border-gray-300 px-4 py-2.5
+                 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3 mt-2">
+      <input
+        type="checkbox"
+        [(ngModel)]="availability"
+        name="availability"
+        class="h-5 w-5 rounded border-gray-300 text-green-600 focus:ring-green-500"
+      />
+      <span class="text-sm text-gray-700">
+        Available for work
+      </span>
+    </div>
+  </section>
+
+  <section *ngIf="!candidate" class="space-y-4">
+    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+      Import Data
+    </h4>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">
+        Excel File
+      </label>
+      <input
+        type="file"
+        accept=".xlsx"
+        (change)="onFileChange($event)"
+        class="block w-full text-sm text-gray-600
+               file:mr-4 file:rounded-xl file:border-0
+               file:bg-blue-50 file:px-4 file:py-2
+               file:text-blue-700 hover:file:bg-blue-100"
+      />
+    </div>
+  </section>
+
+  <div class="flex justify-end gap-3 pt-8 border-t">
     <button
       type="button"
-      class="px-4 py-2 rounded-md bg-gray-100 text-gray-700 hover:bg-gray-200"
+      class="px-5 py-2.5 rounded-xl bg-gray-100 text-gray-700
+             hover:bg-gray-200 transition"
       (click)="cancel.emit()"
     >
       Cancel
@@ -87,14 +120,14 @@
 
     <button
       type="submit"
-      [disabled]="
-        !name ||
-        !surname ||
-        (!candidate && !file)
-      "
-      class="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 disabled:bg-blue-300 disabled:cursor-not-allowed"
+      [disabled]="!name || !surname || (!candidate && !file)"
+      class="px-6 py-2.5 rounded-xl text-white font-semibold
+             bg-gradient-to-r from-blue-600 to-indigo-600
+             hover:scale-[1.02] transition
+             disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      {{ candidate ? 'Update' : 'Create' }}
+      {{ candidate ? 'Update Candidate' : 'Create Candidate' }}
     </button>
   </div>
+
 </form>
